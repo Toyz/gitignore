@@ -1,0 +1,50 @@
+name: Go
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+      id: go
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v1
+      
+    - name: Build Linux
+      run: go build -o ./out/linux/gitignore -v . 
+
+    - name: Build MacOS
+      env:
+        GOOS: darwin
+      run: go build -o ./out/macos/gitignore -v . 
+
+    - name: Build Windows
+      env:
+        GOOS: windows
+      run: go build -o ./out/windows/gitignore.exe -v . 
+    
+    - uses: actions/upload-artifact@v1
+      name: Upload Artifacts
+      with:
+        name: gitignore-linux
+        path: ./out/linux/gitignore
+
+    - uses: actions/upload-artifact@v1
+      name: Upload Artifacts
+      with:  
+        name: gitignore-macos
+        path: ./out/macos/gitignore
+        
+    - uses: actions/upload-artifact@v1
+      name: Upload Artifacts
+      with:
+        name: gitignore-windows
+        path: ./out/windows/gitignore.exe
+
