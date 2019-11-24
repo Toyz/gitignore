@@ -19,14 +19,13 @@ func main() {
 
 	args := os.Args[1:]
 	if len(args) == 0 {
-		fmt.Println("Usage:")
-		fmt.Printf("%s --types [types | license] -- List supported gitignore types\n", path)
-		fmt.Printf("%s --license [file] -- License file to download\n", path)
-		fmt.Printf("%s [file] -- Gitignore file to download\n", path)
-		return // TODO
+		showHelp(path)
+		return
 	}
 
 	switch args[0] {
+	case "--help", "-h":
+		showHelp(path)
 	case "--types", "-t", "--type":
 		if len(args) < 2 {
 			args[1] = "types"
@@ -100,4 +99,11 @@ func handleLicenseList() {
 	}
 
 	fmt.Printf("License: %s", strings.Join(f, ", "))
+}
+
+func showHelp(path string) {
+	fmt.Println("Usage:")
+	fmt.Printf("%s --types [types | license] -- List supported gitignore types\n", path)
+	fmt.Printf("%s --license [file] -- License file to download\n", path)
+	fmt.Printf("%s [file] -- Gitignore file to download\n", path)
 }
