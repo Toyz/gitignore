@@ -18,7 +18,8 @@ $ go get -u github.com/toyz/gitignore
 $ gitignore
 
 Usage:
-gitignore --types [types | license] -- List supported gitignore types
+gitignore --help -- Show this help
+gitignore --type [ignores | licenses] -- List supported gitignore types
 gitignore --license [file] -- License file to download
 gitignore [file] -- Gitignore file to download
 ```

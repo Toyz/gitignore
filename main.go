@@ -104,6 +104,7 @@ func handleLicenseList() {
 
 func showHelp(path string) {
 	fmt.Println("Usage:")
+	fmt.Printf("%s --help -- Show this help\n", path)
 	fmt.Printf("%s --type [ignores | licenses] -- List supported gitignore types\n", path)
 	fmt.Printf("%s --license [file] -- License file to download\n", path)
 	fmt.Printf("%s [file] -- Gitignore file to download\n", path)
