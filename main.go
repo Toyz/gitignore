@@ -27,14 +27,15 @@ func main() {
 	case "--help", "-h":
 		showHelp(path)
 	case "--types", "-t", "--type":
-		if len(args) < 2 {
-			args[1] = "types"
+		t := "types"
+		if len(args) == 2 {
+			t = args[1]
 		}
 
-		switch args[1] {
-		case "types":
+		switch t {
+		case "types", "ignores", "ignore":
 			handleTypeList()
-		case "license":
+		case "license", "lic", "licenses":
 			handleLicenseList()
 		default:
 			handleTypeList()
@@ -78,11 +79,11 @@ func handleTypeList() {
 	}
 
 	types := make([]string, len(files))
-	for i, _ := range types {
+	for i := range types {
 		types[i] = files[i].FileName
 	}
 
-	fmt.Printf("Types: %s", strings.Join(types, ", "))
+	fmt.Printf("Ignores: %s", strings.Join(types, ", "))
 }
 
 func handleLicenseList() {
@@ -94,7 +95,7 @@ func handleLicenseList() {
 	}
 
 	f := make([]string, len(files))
-	for i, _ := range files {
+	for i := range files {
 		f[i] = files[i].Key
 	}
 
@@ -103,7 +104,7 @@ func handleLicenseList() {
 
 func showHelp(path string) {
 	fmt.Println("Usage:")
-	fmt.Printf("%s --types [types | license] -- List supported gitignore types\n", path)
+	fmt.Printf("%s --type [ignores | licenses] -- List supported gitignore types\n", path)
 	fmt.Printf("%s --license [file] -- License file to download\n", path)
 	fmt.Printf("%s [file] -- Gitignore file to download\n", path)
 }
