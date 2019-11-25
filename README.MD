@@ -32,3 +32,7 @@ $ gitignore go
 $ gitignore --license mit
 > LICENSE has been created... Your good to go!
 ```
+
+## Credits
+
+All .gitignore files are from https://github.com/toptal/gitignore
