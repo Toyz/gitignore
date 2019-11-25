@@ -2,6 +2,7 @@ package github
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -38,7 +39,7 @@ func getJson(url string, target interface{}) error {
 func List() ([]File, error) {
 	var files []File
 
-	err := getJson("https://api.github.com/repos/github/gitignore/contents", &files)
+	err := getJson("https://api.github.com/repos/toptal/gitignore/contents/templates", &files)
 	if err != nil {
 		return nil, err
 	}
@@ -85,6 +86,10 @@ func Download(url, file string) error {
 		return err
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusNotFound {
+		return errors.New("not found")
+	}
 
 	// Create the file
 	out, err := os.Create(file)

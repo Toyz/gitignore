@@ -62,9 +62,10 @@ func main() {
 		fmt.Printf("LICENSE has been created... Your good to go!")
 
 	default:
-		err := github.Download(fmt.Sprintf("https://raw.githubusercontent.com/github/gitignore/master/%s.gitignore", strings.Title(args[0])), ".gitignore")
+		err := github.Download(fmt.Sprintf("https://raw.githubusercontent.com/toptal/gitignore/master/templates/%s.gitignore", args[0]), ".gitignore")
 		if err != nil {
-			panic(err)
+			fmt.Printf("failed to get %s error %s\n", args[0], err)
+			return
 		}
 		fmt.Printf(".gitignore has been created... Your good to go!")
 	}
